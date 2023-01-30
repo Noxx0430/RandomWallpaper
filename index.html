@@ -1,0 +1,57 @@
+<!--
+  ＜説明＞
+  設定やその他詳細は画面右上に薄く表示される「設定」ボタンからご覧ください。
+-->
+
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+    <title>乱数壁紙</title>
+  </head>
+  <body>
+
+    <div class="setting_opener" onclick="settingOpen()">設定</div>
+
+    <div id="content"></div>
+
+
+    <div class="setting" id="setting">
+      <b>文字色<span>（以下よりランダムに選択されます）</span></b>
+      <textarea id="color_area"></textarea>
+
+      <b>背景色</b>
+      <input type="text" value="#333333" id="back_color">
+
+      <b>フォントサイズ<span>（大きな値を入力すると負荷が大きくなります）</span></b>
+      <span>最小値(px)</span><input type="number" value="0" id="min_size">
+      <span>最大値(px)</span><input type="number" value="50" id="max_size">
+
+      <b>乱数<span>（表示時間を長くすると負荷が大きくなります）</span></b>
+      <span>最小値</span><input type="number" value="0" id="min_num">
+      <span>最大値</span><input type="number" value="100" id="max_num">
+      <span>生成間隔(ms)</span><input type="number" value="10" id="generate_time">
+      <span>表示時間(ms)</span><input type="number" value="1000" id="show_time">
+      <span class="exp" onclick="exp()">詳細</span>
+      <div class="save_button" id="save" onclick="save()">完了</div>
+      <div class="cancel_button" id="cancel" onclick="cancel()">キャンセル</div>
+      <div class="reset_button" id="reset" onclick="reset()">リセット</div>
+    </div>
+
+    <div class="exp_content" id="exp_content">
+      <b>乱数壁紙</b>
+      <div>説明</div><p>JavaScriptを用いて画面に乱数をランダムに生成します。</p>
+      <div>バージョン</div><p>1.0.0</p>
+      <div>更新情報</div><p>ver.1.0.0/2023/01/30 － 本サイト公開開始</p>
+      <span onclick="closeExp()">閉じる</span>
+    </div>
+
+    <!-- END -->
+    <div style="position: fixed; left: -10000px;" class="number" id="tmp">000</div>
+    <div class="hide" style="display: none;">
+      <div id="item_number"></div>
+    </div>
+    <script src="base.js"></script>
+  </body>
+</html>
