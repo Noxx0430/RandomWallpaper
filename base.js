@@ -2,11 +2,13 @@
 Colors = "#ffffff\n#c0c0c0\n#808080\n#000000\n#ff0000\n#800000\n#ffff00\n#808000\n#00ff00\n#008000\n#00ffff\n#008080\n#0000ff\n#000080\n#ff00ff\n#800080";
 
 // 要素取得
+const head = document.querySelector("head");
 const content = document.getElementById("content");
 const items = document.getElementById("item_number");
 const textarea = document.getElementById("color_area");
 const colorAreaElm = document.getElementById("color_area");
 const backColorElm = document.getElementById("back_color");
+const fontNameElm = document.getElementById("font_name");
 const minSizeElm = document.getElementById("min_size");
 const maxSizeElm = document.getElementById("max_size");
 const minNumElm = document.getElementById("min_num");
@@ -20,11 +22,9 @@ window.onload = function(){
   const rawData = localStorage.getItem("RandomNumData");
   if(rawData !== null){
     const data = rawData.split(",");
-    console.log(data[0]);
     if(data[0] == ""){
       textarea.value = Colors;
     }else{
-      console.log("a");
       const color = data[0].replace(/\|/g, "\n");
       textarea.value = color;
     }
@@ -35,15 +35,27 @@ window.onload = function(){
     generateTimeElm.value = data[5];
     showTimeElm.value = data[6];
     backColorElm.value = data[7];
+    fontNameElm.value = data[8];
   }else{
     textarea.value = Colors;
   }
 
+  // 背景色
   const backColor = backColorElm.value;
   const body = document.querySelector("body");
   body.setAttribute("style", "background: " + backColor + ";");
 
-  
+  // フォント指定
+  if(fontNameElm.value){
+    const fontName = fontNameElm.value;
+    const fontNameHTML = "https://fonts.googleapis.com/css?family=" + fontName.replace(/\ /g, "+");
+    const createLink = document.createElement("link");
+    createLink.setAttribute("href", fontNameHTML);
+    createLink.setAttribute("rel", "stylesheet");
+    head.appendChild(createLink);
+    content.setAttribute("style", "font-family: " + fontName + ";");
+  }
+
   start();
 }
 
@@ -122,6 +134,7 @@ function closeExp(){
 function save(){
   const color = colorAreaElm.value.replace(/\n/g, "|");
   const back = backColorElm.value;
+  const fontName = fontNameElm.value;
   const minFontSize = Number(minSizeElm.value);
   const maxFontSize = Number(maxSizeElm.value);
   const minNumber = Number(minNumElm.value);
@@ -131,14 +144,14 @@ function save(){
   if(minFontSize > 1000||maxFontSize > 1000||showTime > 10000){
     const userSelect = confirm("入力した値が大きすぎます。\n極端な数字の入力は端末への負荷となります。\n\nそれでも実行しますか？");
     if(userSelect == true){
-      const data = color + "," + minFontSize + "," + maxFontSize + "," + minNumber + "," + maxNumber + "," + geneTime + "," + showTime + "," + back;
+      const data = color + "," + minFontSize + "," + maxFontSize + "," + minNumber + "," + maxNumber + "," + geneTime + "," + showTime + "," + back + "," + fontName;
       localStorage.setItem("RandomNumData", data);
 
       // リロード
       location.reload();
     }
   }else{
-    const data = color + "," + minFontSize + "," + maxFontSize + "," + minNumber + "," + maxNumber + "," + geneTime + "," + showTime + "," + back;
+    const data = color + "," + minFontSize + "," + maxFontSize + "," + minNumber + "," + maxNumber + "," + geneTime + "," + showTime + "," + back + "," + fontName;
     localStorage.setItem("RandomNumData", data);
 
     // リロード
@@ -156,6 +169,7 @@ function reset(){
   if(userInput == true){
     colorAreaElm.value = Colors;
     backColorElm.value = "#333333";
+    fontNameElm.value = "Noto Sans Symbols 2";
     minSizeElm.value = "0";
     maxSizeElm.value = "50";
     minNumElm.value = "0";

@@ -8,13 +8,14 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Solitreo" rel="stylesheet" id>
     <title>乱数壁紙</title>
   </head>
   <body>
 
     <div class="setting_opener" onclick="settingOpen()">設定</div>
 
-    <div id="content"></div>
+    <div class="content" id="content"></div>
 
 
     <div class="setting" id="setting">
@@ -23,6 +24,9 @@
 
       <b>背景色</b>
       <input type="text" value="#333333" id="back_color">
+
+      <b>フォント<span>（GoogleFontsのフォント名を入力してください。<a href="https://fonts.google.com/" target="_blank" rel="noopener noreferrer">こちら</a>を参照）</span></b>
+      <input type="text" id="font_name">
 
       <b>フォントサイズ<span>（大きな値を入力すると負荷が大きくなります）</span></b>
       <span>最小値(px)</span><input type="number" value="0" id="min_size">
@@ -42,8 +46,11 @@
     <div class="exp_content" id="exp_content">
       <b>乱数壁紙</b>
       <div>説明</div><p>JavaScriptを用いて画面に乱数をランダムに生成します。</p>
-      <div>バージョン</div><p>1.0.0</p>
-      <div>更新情報</div><p>ver.1.0.0/2023/01/30 － 本サイト公開開始</p>
+      <div>バージョン</div><p>1.1.0</p>
+      <div>更新情報</div>
+      <p>ver. 1.0.0 (2023/01/30) － 本サイト公開開始</p>
+      <p>ver. 1.0.1 (2023/02/02) － 設定画面のレイアウト調整等</p>
+      <p>ver. 1.1.0 (2023/02/05) － フォントの変更を可能に</p>
       <span onclick="closeExp()">閉じる</span>
     </div>
 
